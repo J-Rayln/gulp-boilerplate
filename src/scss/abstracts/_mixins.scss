@@ -1,0 +1,42 @@
+@use '../abstracts/variables' as v;
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Creates min-width media queries
+/// @param {string} $breakpoint Two(2) character breakpoint name from `$breakpoints` map
+
+@mixin respond-above($breakpoint) {
+  // If the breakpoint exists in the map.
+  @if map-has-key(v.$breakpoints, $breakpoint) {
+    // Get the breakpoint value.
+    $breakpoint-value: map-get(v.$breakpoints, $breakpoint);
+    // Write the media query.
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  }
+  @else { // If the breakpoint doesn't exist in the map.
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+/// Creates max-width media queries
+/// @param {string} $breakpoint Two(2) character breakpoint name from `$breakpoints` map
+
+@mixin respond-below($breakpoint) {
+  // If the breakpoint exists in the map.
+  @if map-has-key(v.$breakpoints, $breakpoint) {
+    // Get the breakpoint value.
+    $breakpoint-value: map-get(v.$breakpoints, $breakpoint);
+    // Write the media query.
+    @media (max-width: $breakpoint-value) {
+      @content;
+    }
+  }
+  @else { // If the breakpoint doesn't exist in the map.
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}

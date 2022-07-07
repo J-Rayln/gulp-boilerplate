@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+// 1. Configuration & helpers  (abstracts)
+// Abstracts are files that do not generate any CSS, but rather gather all Sass 
+// tools and helpers.  With the deprecation of @import pending, these files are 
+// now called using @use within the individual Sass files that need them instead of
+// being brought in using @import via the main.scss file. 
+// See this link for more information:  https://sass-lang.com/documentation/at-rules/import
+
+// 2. Vendors
+
+// 3. Base Stuff
+@forward 'base/base';
+
+// 4. Layout-related sections
+
+// 5. Components
+
+// 6. Page-specific styles
+
+// 7. Themes (if any)

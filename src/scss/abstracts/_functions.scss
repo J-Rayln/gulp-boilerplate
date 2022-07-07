@@ -1,0 +1,28 @@
+@use 'sass:math';
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+
+/// Converts `px` values to `rem` values.  **Parameters should be integers only; no units.**
+/// @param {number} $pixels Pixel value to convert.
+/// @param {number} $base-size [16] Base font size in pixels.  Assumes 1rem = 16px standard.
+
+@function rem($pixels, $base-size: 16) {
+    @if math.is-unitless($pixels) {
+        @return math.div($pixels, $base-size) * 1rem;
+    } @else {
+        @error "Pixel values must be an integer.  Do not include \"px,\" \"rem,\" or other units.";
+    }
+}
+
+/// Converts `px` values to `em` values.  **Parameters should be integers only; no units.**
+/// @param {number} $pixels Pixel value to convert.
+/// @param {number} $base-size [16] Base font size in pixels.  Assumes 1em = 16px standard.
+
+@function em($pixels, $base-size: 16) {
+    @if math.is-unitless($pixels) {
+        @return math.div($pixels, $base-size) * 1em;
+    } @else {
+        @error "Pixel values must be an integer.  Do not include \"px,\" \"em,\" or other units.";
+    }
+}
