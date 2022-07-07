@@ -26,3 +26,28 @@
         @error "Pixel values must be an integer.  Do not include \"px,\" \"em,\" or other units.";
     }
 }
+
+/// Builds a `clalmp()` function, primarily used to bild fluid font sizes.<br>**All values should
+/// be in rems**
+/// @param {number} $size-at-min-width Font size, in rems when the viewport is at the narrowest (phone).
+/// @param {number} $size-at-max-width Font size, in rems when the viewport is at the widest (desktop and above).
+/// @param {number} $min-width [$vpmin] Narrowest viewport width (usually phone).
+/// @param {number} $max-width [$vpmax] Widest viewport width (usually desktop or above).
+
+@function fluid-font($size-at-min-width, $size-at-max-width, $min-width: $vpmin, $max-width: $vpmax) {
+
+    // check to see if the min and max font sizes are the same
+    @if $size-at-min-width == $size-at-max-width {
+        // If they are, don't build a clamp function.  Just return the value of the max.
+        @return $size-at-max-width;
+    } @else {
+        // calculate the slope
+        $slope: math.div($size-at-max-width - $size-at-min-width, $max-width - $min-width);
+        // calculate the point the slope crosses the y axis
+        $y-axis-intersection: -1 * $min-width * $slope + $size-at-min-width;
+        // build the clamp function that will be the value for the font-size property
+        $return-value: clamp(#{$size-at-min-width}, #{$y-axis-intersection} + #{$slope} * 100vw, #{$size-at-max-width});
+        
+        @return $return-value;
+    }
+}

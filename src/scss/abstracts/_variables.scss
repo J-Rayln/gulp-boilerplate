@@ -1,19 +1,100 @@
+@use 'sass:math';
+@use 'functions' as *;
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
-/// Test variable 
-/// @type String
-$test-bg-color: purple;
+// ! Remove this value before production.  It's used only for testing
+$test-bg-color: aquamarine;
 
-
-/// Breakpoints
+/// Map of colors.  Key, value pairs are used to create CSS custom properties 
+/// stored in the `:root` element.
 /// @type Map
+
+$colors: (
+    "primary": (
+        "100":    hsl(243, 87%, 12%), // Very Dark Blue
+        "200":    hsl(238, 22%, 44%), // Desaturated Blue
+    ),
+    "accent": (
+        "100":    hsl(224, 93%, 58%), // Bright Blue
+        "200":    hsl(170, 45%, 43%), // Moderate Cyan
+    ),
+    "neutral": (
+        "100":    hsl(240, 75%, 98%), // Light Grayish Blue
+        "200":    hsl(0, 0%, 75%),    // Light Gray
+    ),
+);
+
+
+/// Breakpoints used to build media queries and define min-max points for 
+/// variable font sizes and other viewport-related `clamp()` values.
+/// @type Map
+/// @prop {string} breakpoint-name 2-character breakpoint name
+/// @prop {number} breakpoint-width 
 $breakpoints:  (
-  "xs": 25em, // 400px
-  "sm": 34em, // 544px
-  "md": 48em, // 768px
-  "lg": 60em, // 960px
-  "xl": 80em, // 1280px
-  "xxl": 90em // 1440px
+  "xs":  25em, // 400px
+  "sm":  34em, // 544px
+  "md":  48em, // 768px
+  "lg":  60em, // 960px
+  "xl":  80em, // 1280px
+  "xxl": 90em  // 1440px
+);
+
+/// Maximum container width for the site.<br>
+/// Use the `f.em()` or `f.rem()` function to convert pixels to em/rem.  Pixel
+/// values are not recommended.
+/// @type Number
+$container-max-width: rem(1440);
+
+/// Used as the default value for the `$min-width` argument in the `fluid-font()`
+/// function.
+/// @see {function} fluid-font
+$vpmin: math.div(map-get($breakpoints, "xs"), 1em) * 1rem;
+
+/// Used as the default value for the `$max-width` argument in the `fluid-font()`
+/// function.
+/// @see {function} fluid-font
+$vpmax: math.div(map-get($breakpoints, "lg"), 1em) * 1rem;
+
+/// Map of font stacks by type/element.  Lists of fonts should be enclsoed in
+/// paremthases `()` to preserve commas.
+/// @type Map
+$font-families: (
+    "body": ('Open Sans', sans-serif),
+);
+
+/// Min/Max font sizes used for fluid font sizes.  Values in this map are used
+/// to build `clamp()` values for CSS custom properties stored in the `:root`
+/// element.
+/// * Font sizes MUST be in rems for clamp function to work.
+/// * Ff there is no min/max, set the 'min' and 'max' to the SAME value.
+/// * Comment out values you don't need or add more using the same format.
+$font-sizes: (
+    "body": (
+        "min": rem(14),
+        "max": 1rem 
+    ),
+    "h1": (
+        "min": 1.25rem,
+        "max": 2rem
+    ),
+    "h2": (
+        "min": .875rem,
+        "max": 2rem
+    ),
+    "h3": (
+        "min": 1rem,
+        "max": 1rem
+    ),
+);
+
+/// Font weights used to build CSS custom properties stored in the `:root`
+/// element.  Comment out or add what you need.
+/// @type Map
+$font-weights: (
+    "light":  300,
+    "normal": 400,
+    "bold":   700,
+    "black":  900,
 );

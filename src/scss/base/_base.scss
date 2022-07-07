@@ -1,6 +1,3 @@
-@use '../abstracts/variables' as v;
-@use '../abstracts/functions' as f;
-@use '../abstracts/mixins' as m;
 // -----------------------------------------------------------------------------
 // This file contains very basic starting point styles
 // -----------------------------------------------------------------------------
@@ -25,13 +22,15 @@ html {
 }
 
 body {
-    background-color: v.$test-bg-color;
+    background-color: $test-bg-color;
 
-    @include m.respond-above(lg) {
+    @include respond-above(lg) {
         font-size: 1rem;
     }
 }
 
 .container {
-    max-width: f.rem(800);
+    max-width: rem(900);
+    max-width: $container-max-width;
+    font-size: fluid-font(1.2rem, 3rem);
 }

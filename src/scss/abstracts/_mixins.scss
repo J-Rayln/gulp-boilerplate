@@ -1,4 +1,4 @@
-@use '../abstracts/variables' as v;
+@use 'sass:math';
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
@@ -8,9 +8,9 @@
 
 @mixin respond-above($breakpoint) {
   // If the breakpoint exists in the map.
-  @if map-has-key(v.$breakpoints, $breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
     // Get the breakpoint value.
-    $breakpoint-value: map-get(v.$breakpoints, $breakpoint);
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
     // Write the media query.
     @media (min-width: $breakpoint-value) {
       @content;
@@ -27,9 +27,9 @@
 
 @mixin respond-below($breakpoint) {
   // If the breakpoint exists in the map.
-  @if map-has-key(v.$breakpoints, $breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
     // Get the breakpoint value.
-    $breakpoint-value: map-get(v.$breakpoints, $breakpoint);
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
     // Write the media query.
     @media (max-width: $breakpoint-value) {
       @content;
@@ -39,4 +39,32 @@
     // Log a warning.
     @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
+}
+
+/// Outputs px based font sizes to rems with px fallback
+/// @param {number} $size Font size in pixels.  **Do not include the 'px' unit**
+/// @param {number} $base [16] Base font size.  Assumes 1rem = 16px.
+/// @example scss outputs a font size of 1.125rem with 18px fallback.
+///   @include font-size(18); 
+/// @output
+///   font-size: 18px;<br>
+///   font-size: 1.125rem;
+
+@mixin font-size($size, $base: 16) {
+  font-size: $size + 0px;
+  font-size: math.div($size, $base) * 1rem;
+}
+
+/// Saves 3 lines of code by outputting standard code for cover
+/// backround images.
+/// @example scss
+///   div {
+///     backround-image: url('/path-to/my-image.png');
+///     @include bg-cover;
+///   }
+
+@mixin bg-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }

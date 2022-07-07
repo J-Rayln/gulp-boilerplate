@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+// TODO #1 Convert @import rules to @use and @forward rules.
 // 1. Configuration & helpers  (abstracts)
 // Abstracts are files that do not generate any CSS, but rather gather all Sass 
 // tools and helpers.  With the deprecation of @import pending, these files are 
@@ -7,10 +8,15 @@
 // being brought in using @import via the main.scss file. 
 // See this link for more information:  https://sass-lang.com/documentation/at-rules/import
 
+// 1. Configuration & Helpers
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
 // 2. Vendors
 
 // 3. Base Stuff
-@forward 'base/base';
+@import 'base/base';
 
 // 4. Layout-related sections
 
