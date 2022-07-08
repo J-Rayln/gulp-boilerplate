@@ -50,7 +50,7 @@
 ///   font-size: 18px;<br>
 ///   font-size: 1.125rem;
 
-@mixin font-size($size, $base: 16) {
+@mixin font-size($size, $base: $base-font-size) {
   font-size: $size + 0px;
   font-size: math.div($size, $base) * 1rem;
 }
