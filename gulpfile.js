@@ -9,6 +9,7 @@ const cssnano = require('cssnano')
 const concat = require('gulp-concat');
 const terser = require('gulp-terser');
 // Other
+// TODO #2 Add cache busting function or delete this package
 const replace = require('gulp-replace');
 const header = require('gulp-header');
 const browsersync = require('browser-sync').create();
