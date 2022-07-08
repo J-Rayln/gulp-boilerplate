@@ -1,5 +1,4 @@
 _view/
 /assets/
 node_modules
-/sassdoc/
 .DS_Store
