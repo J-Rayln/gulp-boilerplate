@@ -1,0 +1,28 @@
+// -----------------------------------------------------------------------------
+// This file contains all CSS Custom Properties
+// -----------------------------------------------------------------------------
+
+:root {
+    /* Colors */
+    @each $cat, $shades in $colors {
+        @each $shade, $value in $shades {
+            --clr-#{$cat}-#{$shade}: #{$value};
+        }
+    }
+
+    /* Font Families */
+    // use 'inspect' to keep quotes and commas in font stacks
+    @each $slector, $value in $font-families {
+        --ff-#{$slector}: #{inspect($value)};
+    }
+
+    /* Font Sizes */
+    @each $key, $value in $font-sizes {
+        --fs-#{$key}: #{fluid-font(map-get($font-sizes, $key, "min"), map-get($font-sizes, $key, "max"))};
+    }
+
+    /* Font Weights */
+    @each $weight, $value in $font-weights {
+        --fw-#{$weight}: #{$value};
+    }
+}
