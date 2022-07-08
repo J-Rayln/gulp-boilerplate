@@ -89,6 +89,11 @@ $font-sizes: (
     ),
 );
 
+/// Base font size.  This value is used for mixins and functions that convert
+/// pixel values to rems & ems.
+/// @type Number
+$base-font-size: 16;
+
 /// Font weights used to build CSS custom properties stored in the `:root`
 /// element.  Comment out or add what you need.
 /// @type Map
