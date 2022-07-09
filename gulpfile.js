@@ -1,52 +1,56 @@
 // Initialize modules
-const { src, dest, watch, series, parallel } = require('gulp');
+const { src, dest, watch, series, parallel } = require("gulp");
 // Styles
-const scss = require('gulp-sass')(require('sass'));
-const postcss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano')
+const scss = require("gulp-sass")(require("sass"));
+const postcss = require("gulp-postcss");
+const autoprefixer = require("autoprefixer");
+const cssnano = require("cssnano");
+const purgecss = require("gulp-purgecss");
 // JavaScript
-const concat = require('gulp-concat');
-const terser = require('gulp-terser');
+const concat = require("gulp-concat");
+const terser = require("gulp-terser");
 // Other
 // TODO #2 Add cache busting function or delete this package
-const replace = require('gulp-replace');
-const header = require('gulp-header');
-const browsersync = require('browser-sync').create();
+const replace = require("gulp-replace");
+const header = require("gulp-header");
+const browsersync = require("browser-sync").create();
 
 // Establish file paths
 const paths = {
     css: {
-        src: './src/scss/**/*.scss',
-        dest: './assets/css',
-        destView: './_view'
+        src: "./src/scss/**/*.scss",
+        dest: "./assets/css",
+        destView: "./_view",
     },
     js: {
-        src: './src/js/**/*.js',
-        dest: './assets/js'
+        src: "./src/js/**/*.js",
+        dest: "./assets/js",
     },
     html: {
-        src: './*.html',
-        serve: './'
-    }
+        src: "./*.html",
+        serve: "./",
+    },
 };
 
 // Header constants
-const pkg = require('./package.json');
-const banner = ['/**',
-    ' * <%= pkg.name %> - <%= pkg.description %>',
-    ' * @version v<%= pkg.version %>',
-    ' * @license <%= pkg.license %>',
-    ' */',
-    ''].join('\n');
+const pkg = require("./package.json");
+const banner = [
+    "/**",
+    " * <%= pkg.name %> - <%= pkg.description %>",
+    " * @version v<%= pkg.version %>",
+    " * @license <%= pkg.license %>",
+    " */",
+    "",
+].join("\n");
 
 // Complies & minifies CSS
 function scssTask() {
     return src(paths.css.src, { sourcemaps: true })
-        .pipe(scss())
-        .pipe(postcss([autoprefixer(), cssnano()]))
-        .pipe(header(banner, { pkg: pkg }))
-        .pipe(dest(paths.css.dest, { sourcemaps: '.' }));
+        .pipe(scss()) // complie the SCSS files
+        .pipe(purgecss({ content: ["*.html"] })) // purge any unused CSS classes (like utiltites)
+        .pipe(postcss([autoprefixer(), cssnano()])) // autoprefix and minify the CSS tha'ts left
+        .pipe(header(banner, { pkg: pkg })) // insert the banner at the top of the file
+        .pipe(dest(paths.css.dest, { sourcemaps: "." })); // save the files where we want them
 }
 
 // Complies CSS into uncompressed css file
@@ -61,10 +65,10 @@ function scssViewtask() {
 // Cooncatenates and uglifies JavsScript files
 function jsTask() {
     return src(paths.js.src, { sourcemaps: true })
-        .pipe(concat('scripts.js'))
+        .pipe(concat("scripts.js"))
         .pipe(terser())
         .pipe(header(banner, { pkg: pkg }))
-        .pipe(dest(paths.js.dest, { sourcemaps: '.' }));
+        .pipe(dest(paths.js.dest, { sourcemaps: "." }));
 }
 
 // BrowserSync to create local server
@@ -75,8 +79,8 @@ function browserSyncServe(cb) {
         },
         notify: {
             styles: {
-                top: 'auto',
-                bottom: '0',
+                top: "auto",
+                bottom: "0",
             },
         },
     });
@@ -93,10 +97,7 @@ function browserSyncReload(cb) {
 function watchTask() {
     watch(
         [paths.css.src, paths.js.src, paths.html.src],
-        series(
-            parallel(scssTask, scssViewtask, jsTask),
-            browserSyncReload
-        )
+        series(parallel(scssTask, scssViewtask, jsTask), browserSyncReload)
     );
 }
 
@@ -105,9 +106,7 @@ function watchTask() {
 function watchNoBsTask() {
     watch(
         [paths.css.src, paths.js.src, paths.html.src],
-        series(
-            parallel(scssTask, scssViewtask, jsTask)
-        )
+        series(parallel(scssTask, scssViewtask, jsTask))
     );
 }
 
@@ -123,7 +122,4 @@ exports.default = series(
 
 // Build & Watch Only
 // This task does not initialize or reload a BrowserSync server
-exports.nobs = series(
-    parallel(scssTask, scssViewtask, jsTask),
-    watchNoBsTask
-);
+exports.nobs = series(parallel(scssTask, scssViewtask, jsTask), watchNoBsTask);
