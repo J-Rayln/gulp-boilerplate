@@ -5,8 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
-    "nobs": "gulp nobs",
-    "docs": "sassdoc src/scss"
+    "nobs": "gulp nobs"
   },
   "repository": {
     "type": "git",
@@ -31,6 +30,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-header": "^2.0.9",
     "gulp-postcss": "^9.0.1",
+    "gulp-purgecss": "^4.1.3",
     "gulp-replace": "^1.1.3",
     "gulp-sass": "^5.1.0",
     "gulp-terser": "^2.1.0",
