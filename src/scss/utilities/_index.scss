@@ -1,4 +1,10 @@
+// -----------------------------------------------------------------------------
+// This file compiles all utility partials.  Add '@use ./path/utilities/';
+// to the top of the file to use this library.
+// -----------------------------------------------------------------------------
+
 @forward "./variables";
 @forward "./functions";
 @forward "./breakpoints";
 @forward "./tyography";
+@forward "./utilities";

@@ -6,8 +6,9 @@
   "scripts": {
     "start": "gulp",
     "nobs": "gulp nobs",
-    "dev": "sass --watch src/scss:_view/",
-    "cleanProject": "rm -rf node_modules/ _view"
+    "sassDev": "sass --watch src/scss:_view/",
+    "cleanProject": "rm -rf node_modules/ _view",
+    "cleanView": "rm -rf node_modules/ _view"
   },
   "repository": {
     "type": "git",

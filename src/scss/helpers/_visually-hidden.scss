@@ -1,0 +1,16 @@
+// -----------------------------------------------------------------------------
+// This file contains styles dealing with hiding elements from view
+// -----------------------------------------------------------------------------
+
+.sr-only {
+  /* for screen readers only.  hides content from the sighted viewer */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0 0, 0);
+  white-space: norap; /* added line */
+  border: 0;
+}

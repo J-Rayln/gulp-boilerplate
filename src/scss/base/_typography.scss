@@ -1,0 +1,33 @@
+@use "../utilities/" as u;
+// -----------------------------------------------------------------------------
+// This file contains global typography styles
+// -----------------------------------------------------------------------------
+
+/* typography */
+
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-normal);
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+h4 {
+  font-size: var(--fs-h4);
+}
+
+h5 {
+  font-size: var(--fs-h5);
+}
