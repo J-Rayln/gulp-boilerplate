@@ -1,0 +1,127 @@
+// ----------------------------------------------------------------------------
+// Variables & Configuration
+//
+// This file contains all global variables and maps.
+// ----------------------------------------------------------------------------
+
+// Theme colors
+// This map will generate CSS custom prooperties in the :root selector in the
+// format of '--clr-category-shade: $hslValue' as well as utility classes for
+// '.text-caregory-shade' and '.bg-category-shade.'
+$theme-colors: (
+  "primary": (
+    // Very Dark Blue
+    "100": hsl(243 87% 12%),
+    // Desaturated Blue
+    "200": hsl(238, 22%, 44%),
+  ),
+  "accent": (
+    // Bright Blue
+    "100": hsl(224, 93%, 58%),
+    // Moderate Cyan
+    "200": hsl(170, 45%, 43%),
+  ),
+  "neutral": (
+    // Light Grayish Blue
+    "100": hsl(240, 75%, 98%),
+    // Light Gray
+    "200": hsl(0, 0%, 75%),
+  ),
+);
+
+// Primary Colors
+// This map is used to generate '.text-$color-[100-900]' and
+// '.bg-$color-[100-900]' utilitiy classes.
+$primary-colors: (
+  "white":     #ffffff,
+  "black":     #000000,
+  "gray":      #adb5bd,
+  "cyan":      #0dcaf0,
+  "teal":      #20c997,
+  "green":     #198754,
+  "yellow":    #ffc107,
+  "orange":    #fd7e14,
+  "red":       #dc3545,
+  "pink":      #d63384,
+  "purple":    #6f42c1,
+  "indigo":    #6610f2,
+  "blue":      #0d6efd,
+) !default;
+
+
+// Font Stacks
+// Default 
+$font-family-sans-serif:     system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-serif:          null !default;
+$font-family-monospace:      SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+
+// Font Family Map
+// This map will generate CSS Custom properties stored in the :root selector
+// in the format '--ff-$key: $value'.
+$font-families: (
+  "body":       $font-family-sans-serif,
+  "headings":   $font-family-serif,
+  "code":       $font-family-monospace,
+);
+
+// Font sizes
+// 
+// Add any selector you need.  Comment out or delete entries you don't.
+// min/max values will be used to create clamp values for variable font sizes.
+// To use fixed font sizes, set both min and max to the same value.
+// Values can be in px, rem, or em.
+$font-sizes: (
+    "body": (
+        "min": 1rem,
+        "max": 2rem 
+    ),
+    "h1": (
+        "min": 1.25rem,
+        "max": 2rem
+    ),
+    "h2": (
+        "min": .875rem,
+        "max": 2rem
+    ),
+    "h3": (
+        "min": 1rem,
+        "max": 1rem
+    ),
+);
+
+// Base Font Size
+// Sets base font size for the html selector and is used by mixins and
+// functions to convert pixel values to rem and em values.  Assumes 
+// browser default of 16px.
+$base-font-size: 16px;
+
+// Font Weights
+// comment out weights that aren't needed
+$font-weights: (
+  "extra-light":   200,
+  "light":         300,
+  "normal":        400,
+  "mediium":       500,
+  "semi-bold":     600,
+  "bold":          700,
+  "extra-bold":    800,
+  "black":         900
+);
+
+// Container Max Width
+$container-max-width: 80em; // 1280px
+
+// Breakpoints
+//
+// This map is used to build media queries as well as default min/max
+// viewport width values used to calculate clamp functions
+// see (./abstracts/_typography.scss)
+
+$breakpoints:  ( 
+  "xs":  25em, // 400px
+  "sm":  34em, // 544px
+  "md":  48em, // 768px
+  "lg":  60em, // 960px
+  "xl":  80em, // 1280px
+  "xxl": 90em  // 1440px
+);

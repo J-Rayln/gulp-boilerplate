@@ -1,0 +1,50 @@
+@use "variables" as v;
+// ----------------------------------------------------------------------------
+// Brekpoints
+//
+// This file contains mixins and functions related to brekpoints
+// used throughout the site.  Layout variables like $max-container-width also
+// reside in this file.
+// ----------------------------------------------------------------------------
+
+// Creates min-width media queries.
+//
+// Enter the 2 character breakpoint from the $breakpoints map.
+// If the value entered does not match a key in the current $breakpoints map
+// the mxin throws an error.
+@mixin respond-above($breakpoint) {
+  // If the breakpoint exists in the map.
+  @if map-has-key(v.$breakpoints, $breakpoint) {
+    // Get the breakpoint value.
+    $breakpoint-value: map-get(v.$breakpoints, $breakpoint);
+    // Write the media query.
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    // If the breakpoint doesn't exist in the map.
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// Creates max-width media queries.
+//
+// Enter the 2 character breakpoint from the $breakpoints map.
+// If the value entered does not match a key in the current $breakpoints map
+// the mxin throws an error.
+@mixin respond-below($breakpoint) {
+  // If the breakpoint exists in the map.
+  @if map-has-key(v.$breakpoints, $breakpoint) {
+    // Get the breakpoint value.
+    $breakpoint-value: map-get(v.$breakpoints, $breakpoint);
+    // Write the media query.
+    @media (max-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    // If the breakpoint doesn't exist in the map.
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}

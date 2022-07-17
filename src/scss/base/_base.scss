@@ -1,3 +1,5 @@
+@use "../utilities/" as u;
+
 // -----------------------------------------------------------------------------
 // This file contains very basic starting point styles
 // -----------------------------------------------------------------------------
@@ -6,7 +8,7 @@
  * Set up a decent box model on the root element
  */
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /**
@@ -18,23 +20,19 @@ html {
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body {
-    background-color: $test-bg-color;
+  background-color: var(--clr-neutral-100, #ffffff);
 
-    @include respond-above(lg) {
-        font-size: 1rem;
-    }
-
-    @include respond-below(md) {
-        @include font-size(14);
-    }
+  @include u.respond-above(lg) {
+    font-size: 1rem;
+  }
 }
 
 .container {
-    max-width: rem(900);
-    max-width: $container-max-width;
-    font-size: fluid-font(1.2rem, 3rem);
+  max-width: u.to-rem(900px);
+  max-width: u.$container-max-width;
+  font-size: u.fluid-font(1.2rem, 3rem);
 }
