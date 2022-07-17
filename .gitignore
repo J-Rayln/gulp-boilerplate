@@ -2,3 +2,4 @@ _view/
 /assets/
 node_modules
 .DS_Store
+.prettierignore
