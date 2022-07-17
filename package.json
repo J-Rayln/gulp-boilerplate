@@ -1,6 +1,6 @@
 {
   "name": "sass-gulp4-boilerplate",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A basic boilerplate using Gulp 4 and Sass",
   "main": "gulpfile.js",
   "scripts": {
