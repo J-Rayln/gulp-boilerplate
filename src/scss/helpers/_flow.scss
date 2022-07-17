@@ -1,0 +1,17 @@
+@use "../utilities/" as u;
+// -----------------------------------------------------------------------------
+// This file contains helper classes that deal with flow and containers
+// -----------------------------------------------------------------------------
+
+.container {
+  // 1. logical property that only looks at the x-axis
+  padding-inline: 2em; // 1
+  margin-inline: auto; // 1
+  max-width: u.$container-max-width;
+}
+
+// Select all direct children EXCEPT the last one and add a defualt spacer
+// Change the undefined custom prop to modify on an as-needed basis
+.flow > *:where(:not(:last-child)) {
+  margin-bottom: var(--flow-space, 1rem);
+}

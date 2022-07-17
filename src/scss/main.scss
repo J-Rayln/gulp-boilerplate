@@ -1,8 +1,12 @@
 @charset "UTF-8";
 
-// Base
-//
-// Global/General styles used across the site
+// Base - Global/General styles used across the site
 @forward "base/root";
 @forward "base/reset";
 @forward "base/base";
+@forward "base/typography";
+
+// Helper classes
+@forward "helpers/layout";
+@forward "helpers/flow";
+@forward "helpers/visually-hidden";
