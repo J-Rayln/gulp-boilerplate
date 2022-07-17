@@ -32,7 +32,7 @@ See addiional commands below.
 ### Version 2.1.0
 - Built out SCSS folder structure
 - Added script functionality to `package.json` to clean up project folder when complete by deleting `node_modules` and `_view`.
-  - *Important: make sure to uninstall dependencies by running `npm uninstall -D <package-name>` for **each** package before running `npm cleanProject`.
+  - *Important: make sure to uninstall dependencies by running `npm uninstall -D <package-name>` for **each** package before running `npm cleanProject`.*
 - Added helper classes
 - Minor code improvements
 
