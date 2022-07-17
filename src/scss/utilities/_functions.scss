@@ -1,0 +1,44 @@
+@use "sass:math";
+@use "variables" as v;
+// ----------------------------------------------------------------------------
+// Global Functions
+//
+// This file contains all global functions that do not nreessarily belong in
+// one particular category.
+// ----------------------------------------------------------------------------
+
+// Strips unit from numbers with units
+// See: https://css-tricks.com/snippets/sass/strip-unit-function/
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    // updated original function to use the sass:math module
+    @return math.div($number, ($number * 0 + 1));
+  }
+  @return $number;
+}
+
+// Convert px, or em values to rem
+//
+// If value is already rem, then funciton outputs the value as-is
+// If value is in px or em, funciton converts to rem assuming the following:
+//      1rem = 16px
+//      1rem = 1em
+// If value is anything other than rem, em, or px, function throws an error.
+
+@function to-rem($value) {
+  // check if $value passed is a rem unit
+  @if math.unit($value) == rem {
+    // if so, then just use the value as is
+    @return $value;
+  } @else if math.unit($value) == em {
+    // if value is in em, then convert to rem
+    @return math.div($value, ($value * 0 + 1)) + 0rem;
+  } @else if math.unit($value) == px {
+    // if value is in pixels, convert to rem
+    @return math.div(
+        math.div($value, ($value * 0 + 1)),
+        strip-unit(v.$base-font-size)
+      ) + 0rem;
+  }
+  @error "Value entered (#{$value}) is missing or has an invalid unit.  $value must be in px, em, or rem units.";
+}

@@ -1,28 +1,38 @@
+@use "../utilities/" as u;
 // -----------------------------------------------------------------------------
 // This file contains all CSS Custom Properties
 // -----------------------------------------------------------------------------
 
 :root {
-    /* Colors */
-    @each $cat, $shades in $colors {
-        @each $shade, $value in $shades {
-            --clr-#{$cat}-#{$shade}: #{$value};
-        }
+  /* Theme Colors */
+  @each $type, $colors in u.$theme-colors {
+    @each $color, $value in $colors {
+      --clr-#{$type}-#{$color}: #{$value};
     }
+  }
 
-    /* Font Families */
-    // use 'inspect' to keep quotes and commas in font stacks
-    @each $slector, $value in $font-families {
-        --ff-#{$slector}: #{inspect($value)};
-    }
+  /* Font Families */
+  // use 'inspect' to keep quotes and commas in font stacks
+  @each $slector, $value in u.$font-families {
+    --ff-#{$slector}: #{inspect($value)};
+  }
 
-    /* Font Sizes */
-    @each $key, $value in $font-sizes {
-        --fs-#{$key}: #{fluid-font(map-get($font-sizes, $key, "min"), map-get($font-sizes, $key, "max"))};
-    }
+  /* Font Sizes */
+  @each $selector, $map in u.$font-sizes {
+    $min: map-get($map, "min");
+    $max: map-get($map, "max");
 
-    /* Font Weights */
-    @each $weight, $value in $font-weights {
-        --fw-#{$weight}: #{$value};
+    @if $min == $max {
+      // if min/max are the same, just output a single font size
+      --fs-#{$selector}: #{$min};
+    } @else {
+      // if min/max are DIFFERENT, build a clamp value
+      --fs-#{$selector}: #{u.fluid-font($min, $max)};
     }
+  }
+
+  /* Font Weights */
+  @each $weight, $value in u.$font-weights {
+    --fw-#{$weight}: #{$value};
+  }
 }

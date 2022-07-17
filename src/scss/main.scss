@@ -1,23 +1,8 @@
 @charset "UTF-8";
 
-// TODO #1 Convert @import rules to @use and @forward rules.
-
-// 1. Configuration & Helpers
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-
-// 2. Vendors
-
-// 3. Base Stuff
-@import 'base/root';
-@import 'base/reset';
-@import 'base/base';
-
-// 4. Layout-related sections
-
-// 5. Components
-
-// 6. Page-specific styles
-
-// 7. Themes (if any)
+// Base
+//
+// Global/General styles used across the site
+@forward "base/root";
+@forward "base/reset";
+@forward "base/base";

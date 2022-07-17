@@ -1,0 +1,38 @@
+@use "sass:math";
+@use "functions" as f;
+@use "variables" as v;
+// ----------------------------------------------------------------------------
+// Typography Mixins & Functions
+//
+// This file contains all mixins and functions used to render typography
+// styles.
+// ----------------------------------------------------------------------------
+
+// Builds a clamp function for fluid font sizes in responsive layouts
+//
+// Based on calculations outlined in an article by Pedro Rodriquez
+// https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
+//
+// Default viewport width values are pulled from the $breakpoints map
+
+@function fluid-font(
+  $font-size-at-min-viewport-width,
+  $font-size-at-max-viewport-width,
+  $min-viewport-width: map-get(v.$breakpoints, "sm"),
+  $max-viewport-width: map-get(v.$breakpoints, "lg")
+) {
+  // 1st convert the arguments to rems, regardless of their unit value
+  $fs-min: f.to-rem($font-size-at-min-viewport-width);
+  $fs-max: f.to-rem($font-size-at-max-viewport-width);
+  $vw-min: f.to-rem($min-viewport-width);
+  $vw-max: f.to-rem($max-viewport-width);
+  // 2nd calculate the slope
+  $slope: math.div(($fs-max - $fs-min), ($vw-max - $vw-min));
+  // 3rd calculate the yAxxisIntersection (the 1st half of the preferred value)
+  $yAxisIntersection: -1 * $vw-min * $slope + $fs-min;
+  // 4th calculate the viewport width portion of the preferred value (the second half)
+  $preferred-value-vw: $slope * 100vw;
+  // Finally, build the clamp function
+  /* prettier-ignore */
+  @return clamp(#{$fs-min}, #{$yAxisIntersection} + #{$preferred-value-vw}, #{$fs-max});
+}
