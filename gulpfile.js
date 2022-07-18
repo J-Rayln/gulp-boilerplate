@@ -30,10 +30,6 @@ const files = {
     src: "src/js/**/*.js",
     dest: "dist/js",
   },
-  img: {
-    src: "src/img/**/*",
-    dest: "dist/img",
-  },
   html: {
     serve: "./",
   },
