@@ -49,6 +49,10 @@ This command runs the build tasks WITH the `--env production` flag.  With this f
 ---
 ## Changelog
 
+#### Version 2.1.2
+- Bug fix #8: Browser-Synch not reloading after save to HTML files
+- Added `./src/scss/components` folder to `main.scss` forwards.
+
 #### Version 2.1.1
 - Updated Gulp tasks (see above notes for functionality)
 - Updated Node scripts

@@ -112,6 +112,7 @@ function browserSyncReload(cb) {
 
 // watch task
 function watchTask() {
+  watch("*.html", browserSyncReload);
   watch(
     [files.styles.src, files.js.src],
     series(

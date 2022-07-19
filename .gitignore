@@ -1,5 +1,8 @@
 _view/
-/assets/
 node_modules
 .DS_Store
 .prettierignore
+
+# Since this is a dev repo, we leave out the ./dist/ directory
+# You may want to remove these lines after you clone the repo
+/dist/
