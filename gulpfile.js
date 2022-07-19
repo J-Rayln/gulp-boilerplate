@@ -128,7 +128,7 @@ function cleanTask() {
 exports.default = series(
   cleanTask,
   parallel(scssTask, jsTask),
-  cacheBustingTask,
+  // cacheBustingTask,
   browserSyncServe,
   watchTask
 );
