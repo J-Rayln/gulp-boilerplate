@@ -81,12 +81,6 @@ function jsTask() {
 }
 
 // cachebusting task
-const cbString = new Date().getTime();
-function cacheBustingTask() {
-  return src(["index.html"])
-    .pipe(replace(/v=\d+/g, "v=" + cbString))
-    .pipe(dest("."));
-}
 
 // BrowserSync to create local server
 function browserSyncServe(cb) {
@@ -118,7 +112,7 @@ function watchTask() {
     series(
       cleanTask,
       parallel(scssTask, jsTask),
-      cacheBustingTask,
+      // cacheBustingTask,
       browserSyncReload
     )
   );
@@ -141,10 +135,14 @@ exports.default = series(
 exports.devNoBs = series(
   cleanTask,
   parallel(scssTask, jsTask),
-  cacheBustingTask,
+  // cacheBustingTask,
   watchTask
 );
 
-exports.build = series(cleanTask, parallel(scssTask, jsTask), cacheBustingTask);
+exports.build = series(
+  cleanTask,
+  parallel(scssTask, jsTask)
+  // cacheBustingTask
+);
 
 exports.clean = cleanTask;
